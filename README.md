@@ -69,3 +69,10 @@ Lower bitrates usually take a few more rounds of processing, due to the desctruc
 
 ## Caveats
 The drag & drop input is based on how macOS handles it in zsh; it uses / to escape spaces and special characters.
+
+## FAQ
+Will you release a Windows, Linux or MacOS (Intel) version?
+> I own neather of those systems, but Python, freac and ffmpeg/ffprobe are availble for all all those platforms.
+
+## Other Questions?
+I'm usually found on Instagram, just send me a DM https://instagram.com/vatogonzalez
