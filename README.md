@@ -8,7 +8,7 @@ The missing package manager for macOS. https://brew.sh
 ### freac
 Free cross platform audio encoding tool, needed for the multi-threaded LAME MP3 encoding. Has GUI, but only using the CLI executable. https://freac.org
 ### afclip
-Apple's clipping detection tool, available for free as a part of Apple's "Mastered for iTunes" suite. https://www.apple.com/itunes/mastered-for-itunes/"
+Apple's clipping detection tool (included in the lastest versions of macOS) but also available for free as a part of Apple Digital Masters "Mastering Tools" https://www.apple.com/apple-music/apple-digital-masters/
 ### ffmpeg 
 For macOS, install from commandline with homebrew
 ```sh
