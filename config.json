@@ -24,6 +24,10 @@
         },
         "ffprobe": {
             "cmd": "/opt/homebrew/bin/ffprobe",
+            "info": "Install with Homebrew; brew install ffprobe"
+        },
+        "ffmpeg": {
+            "cmd": "/opt/homebrew/bin/ffmpeg",
             "info": "Install with Homebrew; brew install ffmpeg"
         }
     }

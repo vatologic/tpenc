@@ -33,7 +33,3 @@ If the file does have (inter inter sample or true peak) clipping, a temporary co
 
 ## Caveats
 Due to the way macOS handles terminal input (drag & drop) differently for bash than zsh, it took a bit of finicky code to get the input right.
-
-## Todo
-* Add ffmpeg to the required apps in the config and script
-	

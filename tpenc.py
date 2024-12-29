@@ -175,7 +175,7 @@ def intermediate(file_in, remove = False):
 def reduceGain(file_in, db = 0.0):
     # Use Temp file
     temp_file = intermediate(file_in)
-    ffmpeg_command = 'ffmpeg -y -i "{}" -filter:a "volume={}dB" -acodec {} -ar {} "{}"'.format(file_in, (db*-1), config["wav"]["codec_name"], config["wav"]["sample_rate"],temp_file)
+    ffmpeg_command = '{} -y -i "{}" -filter:a "volume={}dB" -acodec {} -ar {} "{}"'.format(config["lib"]["ffmpeg"]["cmd"], file_in, (db*-1), config["wav"]["codec_name"], config["wav"]["sample_rate"],temp_file)
     subprocess.run([ffmpeg_command], shell=True, capture_output=True, text=True)
     #ver("Gain recuded by {} dB".format(str(db)))
                     
