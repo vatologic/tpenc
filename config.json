@@ -1,0 +1,34 @@
+{
+    "verbose": false,
+    "wav": {
+        "codec_name": "pcm_s24le",
+        "sample_rate" : 48000
+    },
+    "mp3": {
+        "threads": 15,
+        "quality": 1,
+        "encoder": "LAME",
+        "method": "CBR"
+    },
+    "app": "tpenc",
+    "vendor": "Vatologic B.V.",
+    "version": "4.0",
+    "lib": {
+        "freac": {
+            "cmd": "/Applications/freac.app/Contents/MacOS/freaccmd",
+            "info": "Free download; https://www.freac.org"
+        },
+        "id3v2": {
+            "cmd": "/opt/homebrew/bin/id3v2",
+            "info": "Install with Homebrew; brew install id3v2"
+        },
+        "afclip": {
+            "cmd": "/usr/bin/afclip",
+            "info": "Free download; https://www.apple.com/itunes/mastered-for-itunes/"
+        },
+        "ffprobe": {
+            "cmd": "/opt/homebrew/bin/ffprobe",
+            "info": "Install with Homebrew; brew install ffmpeg"
+        }
+    }
+}
