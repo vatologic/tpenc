@@ -5,7 +5,7 @@
         "sample_rate" : 48000
     },
     "mp3": {
-        "threads": 15,
+        "threads": 32,
         "quality": 1,
         "encoder": "LAME",
         "method": "CBR"
@@ -17,10 +17,6 @@
         "freac": {
             "cmd": "/Applications/freac.app/Contents/MacOS/freaccmd",
             "info": "Free download; https://www.freac.org"
-        },
-        "id3v2": {
-            "cmd": "/opt/homebrew/bin/id3v2",
-            "info": "Install with Homebrew; brew install id3v2"
         },
         "afclip": {
             "cmd": "/usr/bin/afclip",
