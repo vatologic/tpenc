@@ -345,7 +345,7 @@
 	<key>VisualBell</key>
 	<false/>
 	<key>WindowTitle</key>
-	<string>Vatologic MMTPME</string>
+	<string>tpenc | vatologic </string>
 	<key>columnCount</key>
 	<integer>130</integer>
 	<key>name</key>
