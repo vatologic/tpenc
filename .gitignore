@@ -1,6 +1,0 @@
-*.DS_Store
-temp/*
-temp/.DS_Store
-!temp/.gitkeep
-*.terminal
-*.code-workspace
