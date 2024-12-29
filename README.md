@@ -1,35 +1,71 @@
 # tpenc
-
 Multi-thread multi-pass true peak MP3 encoder
 
- 
 ## Dependencies
-
-* freac; 
+### python 3.x
+### homebrew
+The missing package manager for macOS. https://brew.sh
+### freac
 Free cross platform audio encoding tool, needed for the multi-threaded LAME MP3 encoding. Has GUI, but only using the CLI executable. https://freac.org
-* afclip; 
+### afclip
 Apple's clipping detection tool, available for free as a part of Apple's "Mastered for iTunes" suite. https://www.apple.com/itunes/mastered-for-itunes/"
-* ffmpeg; 
-For macOS, install with homebrew; brew install ffmpeg
-* ffprobe; 
- For macOS, install with homebrew; brew install ffprobe
+### ffmpeg 
+For macOS, install from commandline with homebrew
+```sh
+brew install ffmpeg
+```
+### ffprobe 
+For macOS, install from commandline with homebrew
+```sh
+brew install ffprobe
+```
+## config.json
+```json
+{
+    "verbose": false,
+    "wav": {
+        "codec_name": "pcm_s24le",
+        "sample_rate" : 48000
+    },
+    "mp3": {
+        "threads": 32,
+        "quality": 1,
+        "encoder": "LAME",
+        "method": "CBR"
+    },
+}
+```
+Edit  to change the default required input encoding. By default the script needs 24-bits 48Khz .wav files in the pcm_s24le codec.
 
+"quality" is a setting of the LAME encoder used to create the MP3. It handles the noise shaping & psycho acoustic algorithms. Range is 0 to 9, where 0 is slow as a snail but has the best results and 9 races through it while doing a sloppy job. It has nothing to do with the bitrate, just how hard the algorythm is working to do the job.
 
-## Config
-Edit config.json to change the default input encoding. By default the script needs 24-bits 48Khz .wav files
+"threads" are currently set to 32 by default. On my current system this works 120% better than single threaded. On my old Intel Xeon system 15 threads worked optimal. I came at this number after testing all threads from 1 to 32 and ran that entire test 32 times. On average 32 worked best for an Apple M2. On other systems I suggest at least 12.
 
-"threads" are currently set to 32 by default. On my current system this works 120% better than single threaded. On my old Intel Xeon system 15 worked optimal.
+```json
+{
+    "lib": {
+        "ffmpeg": {
+            "cmd": "/opt/homebrew/bin/ffmpeg",
+            "info": "Install with Homebrew; brew install ffmpeg"
+        }
+}
+```
 
-## Workflow
-1. Run script python3 tpenc.py
-2. Drag & drop .wav file
-3. Choose bitrate and regular or true peak encoding
-4. Let it run
-5. MP3 file appears in the same folder as the original WAV file
+The cmd parameter is the absolute path to the executeable, in order to find the path you use 'witch' in the terminal
+```sh
+$ which ffmpeg
+/opt/homebrew/bin/ffmpeg
+```
 
-The true peak encoding of an MP3 works by first doing a single encoding from the original WAV to MP3 then analyzing the results. If nothing clips, process is complete.
+## What does it -really- do?
 
-If the file does have (inter inter sample or true peak) clipping, a temporary copy of the WAV file is made from the original. This copy is then reduced in gain by ffmpeg with the dB's clipping from afclip's analysis. Then another MP3 encoding is done from that temporary have > another analysis > still clipping > new copy from the original WAV is made and reduced even further. This way, there is no encoding-upon-encoding and no degradation - and it leaves the original untouched.
+Beyond encoding MP3 files really fast (up to 120% faster in my latest tests) - it does something no other MP3 encoder can do; true peak (inter sample) encoding. Due to the chaotic and lossy nature of MP3 encoding, a WAV file that was mastered at -0.1 dB TPFS will usually end up with inter sample peaks in the encoded MP3 way beyond the -0.1 dB TPFS of the original.
+
+At heart it is basically a while loop where an MP3 is encoded from the original WAV, then check the result for clipping. If so, lower the gain by the highest detected peak above 0 dB TPFS. Then check that result, see if it clips and repeat the process until the MP3 is encoded without peaks.
+
+Instead of re-encoding the same file, every loop a temporary copy of the orignal WAV file is made, lowered by the clipping and then encoded from the temporary file. Every loop a new temporary copy is used, so nothing gets re-encoded and stays clean. The original WAV file is not altered in any way.
+
+Lower bitrates usually take a few more rounds of processing, due to the desctructive nature of MP3 encoding.
 
 ## Caveats
-Due to the way macOS handles terminal input (drag & drop) differently for bash than zsh, it took a bit of finicky code to get the input right.
+The drag & drop input is based on how macOS handles it in zsh; it uses / to escape spaces and special characters.
