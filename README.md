@@ -5,13 +5,13 @@ Multi-thread multi-pass true peak MP3 encoder
  
 ## Dependencies
 
-* freac
+* freac; 
 Free cross platform audio encoding tool, needed for the multi-threaded LAME MP3 encoding. Has GUI, but only using the CLI executable. https://freac.org
-* afclip
+* afclip; 
 Apple's clipping detection tool, available for free as a part of Apple's "Mastered for iTunes" suite. https://www.apple.com/itunes/mastered-for-itunes/"
-* ffmpeg
+* ffmpeg; 
 For macOS, install with homebrew; brew install ffmpeg
-* ffprobe
+* ffprobe; 
  For macOS, install with homebrew; brew install ffprobe
 
 
