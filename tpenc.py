@@ -1,4 +1,3 @@
-#!/opt/homebrew/anaconda3/bin/python3
 import json, os, sys, subprocess, re, time, math, shutil
 from pathlib import Path
 
@@ -13,7 +12,7 @@ multipass = True
 
 # Throw fatal error and exit
 def ferr(message):
-    sys.exit("[FATAL ERROR]\n" + str(message))
+    sys.exit("[FATAL ERROR]\n{}\n\n".format(str(message)))
 
 # Load config
 try:
@@ -30,16 +29,17 @@ def ver(message):
 def ts():
     return int(time.time_ns() / 1000000)
 
+# Check if all the required 3rd party apps are present
+def checkLib():
+    for app in config["lib"]:
+        if (os.path.isfile(config["lib"][app]["cmd"]) != True):
+            ferr(str(app) + " not found at " + config["lib"][app]["cmd"] + "\n\nChange location in config.json or " + str(config["lib"][app]["info"]))
+    ver("Apps")
+
 # Preflight checks
 # --------------------------------------------------------------------------------
 
 def preflight(file_in):
-
-    # Check if all the required 3rd party apps are present
-    for app in config["lib"]:
-        if (os.path.isfile(config["lib"][app]["cmd"]) != True):
-            ferr(str(app) + " not found at " + config["lib"][app]["cmd"] + "\n" + str(config["lib"][app]["info"]))
-    ver("Apps")
 
     # Check if the incoming file is available
     if (os.path.isfile(file_in) != True):
@@ -197,6 +197,7 @@ def header():
 # --------------------------------------------------------------------------------
 
 header()
+checkLib()
 
 print("Drag and drop 2448 .WAV file")
 file_in = ask_user_file()

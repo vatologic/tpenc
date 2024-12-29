@@ -21,7 +21,7 @@ Edit config.json to change the default input encoding. By default the script nee
 "threads" are currently set to 32 by default. On my current system this works 120% better than single threaded. On my old Intel Xeon system 15 worked optimal.
 
 ## Workflow
-1. Run script ./tpenc.py 
+1. Run script python3 tpenc.py
 2. Drag & drop .wav file
 3. Choose bitrate and regular or true peak encoding
 4. Let it run
